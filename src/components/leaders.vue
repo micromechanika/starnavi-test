@@ -70,13 +70,5 @@ export default {
   background-color: $fieldColor;
   justify-content: space-between;
   padding: 0 1em;
-  .name{
-    display: flex;
-    justify-content: flex-start;
-  }
-  .date{
-    display: flex;
-    justify-content: flex-end;
-  }
 }
 </style>
