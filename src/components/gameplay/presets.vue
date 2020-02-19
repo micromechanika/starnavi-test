@@ -1,8 +1,8 @@
 <template>
   <div class="pressers">
     <select v-model="selected">
-      <option v-for="option in options" :value="option.name" :key="option.name">
-        {{ option.name }}
+      <option v-for="preset in Presets" :value="preset.name" :key="preset.name">
+        {{ preset.name }}
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
@@ -11,29 +11,30 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'presets',
   data () {
     return {
       selected: 'Pick game mode',
-      playerName: 'no name user',
-      options: [
-        { name: 'Pick game mode', field: null, delay: null },
-        { name: 'easyMode', field: 5, delay: 2000 },
-        { name: 'normalMode', field: 10, delay: 1000 },
-        { name: 'hardMode', field: 15, delay: 900 }
-      ]
+      playerName: 'no name user'
     }
+  },
+  computed: {
+    ...mapGetters(['Presets'])
   },
   methods: {
     showselected: function () {
-      const show = this.options.filter(i => {
+      const show = this.Presets.filter(i => {
         return i.name === this.selected ? i : ''
       })
       console.log(show[0].name)
       console.log(show[0].field)
       console.log(show[0].delay)
     }
+  },
+  beforeCreate () {
+    this.$store.dispatch('Presets')
   }
 }
 </script>
