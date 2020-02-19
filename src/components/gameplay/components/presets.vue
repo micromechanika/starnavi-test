@@ -6,7 +6,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button @click="showselected">play</button>
+    <button  @click="showselected">play</button>
   </div>
 </template>
 
@@ -44,8 +44,15 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  select{
+    background-color: $selectColor;
+  }
+input{
+  background-color: $inputColor;
+}
   button {
     text-transform: uppercase;
+    background-color: $buttonColor;
   }
 }
 </style>

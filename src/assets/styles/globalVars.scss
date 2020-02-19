@@ -1,11 +1,19 @@
 //@import "animateCSS";
+@import "normalize";
 
 $tablet: "880px";
 $desctop: "1024px";
 
-//main site color
-//background
+
 $white: #ffffff;
+$fieldColor: #cfd8dc;
+$selectColor: #cfd8dc;
+$inputColor: #f3f3f3;
+$buttonColor: #7b8d93;
+$textColor: #888888;
+$borderColor: #ebebed;
+
+
 
 @mixin mQ($arg) {
   @media screen and (min-width: $arg) {

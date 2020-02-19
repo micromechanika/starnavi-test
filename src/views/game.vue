@@ -19,5 +19,6 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    border: $borderColor solid .2em;
   }
 </style>

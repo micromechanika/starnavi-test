@@ -1,6 +1,5 @@
 <template>
 <div class="gameplay">
-<h1>gameplay</h1>
   <presets/>
   <message/>
   <gamezone/>
@@ -8,9 +7,9 @@
 </template>
 
 <script>
-import presets from './presets'
-import message from './message'
-import gamezone from './gamezone'
+import presets from './components/presets'
+import message from './components/message'
+import gamezone from './components/gamezone'
 export default {
   name: 'gameplay',
   components: { presets, message, gamezone }
@@ -19,6 +18,9 @@ export default {
 
 <style lang="scss">
 .gameplay{
-width: 50%;
+  width: 50%;
+  height: 99vh;
+  padding-top: 5em;
+  border-right: $borderColor solid .2em;
 }
 </style>
