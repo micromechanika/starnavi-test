@@ -40,7 +40,7 @@ export default {
 .leaders {
   color: $textColor;
   width: 50%;
-  height: 99vh;
+  height: 100%;
   padding-top: 5em;
   display: flex;
   flex-direction: row;
