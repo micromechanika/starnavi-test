@@ -1,0 +1,20 @@
+//@import "animateCSS";
+
+$tablet: "880px";
+$desctop: "1024px";
+
+//main site color
+//background
+$white: #ffffff;
+
+@mixin mQ($arg) {
+  @media screen and (min-width: $arg) {
+    @content;
+  }
+}
+
+@mixin print(){
+  @media print {
+    @content
+  }
+}

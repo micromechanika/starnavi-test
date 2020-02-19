@@ -10,6 +10,16 @@ const routes = [
     path: '*',
     redirect: '/game',
     component: game
+  },
+  {
+    path: '/',
+    redirect: '/game',
+    component: game
+  },
+  {
+    path: '/game',
+    name: 'game',
+    component: game
   }
 ]
 

@@ -1,13 +1,23 @@
 <template>
-
+  <div class="game">
+    <gameplay />
+    <leaders />
+  </div>
 </template>
 
 <script>
+import gameplay from '../components/gameplay/gameplay'
+import leaders from '../components/leaders'
 export default {
-  name: 'game'
+  name: 'game',
+  components: { gameplay, leaders }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+  .game{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
 </style>
