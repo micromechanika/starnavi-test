@@ -15,7 +15,7 @@ export default {
   props: {
     lines: {
       type: Number,
-      default: 1
+      default: 5
     },
     items: {
       type: Number,
