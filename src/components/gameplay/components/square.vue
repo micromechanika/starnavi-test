@@ -1,5 +1,5 @@
 <template>
-    <div class="row white" @click="selectSquare" ></div>
+    <div class="row white" @click.stop.once="selectSquare" ></div>
 </template>
 
 <script>
@@ -7,12 +7,14 @@ export default {
   name: 'square',
   data () {
     return {
-      clicked: true
+      user: null
     }
   },
   methods: {
     selectSquare: function (e) {
+      e.target.classList.remove('blue', 'white')
       e.target.classList.add('green')
+      this.user += 1
     }
   }
 }

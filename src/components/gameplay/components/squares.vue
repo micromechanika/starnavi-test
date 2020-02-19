@@ -21,7 +21,33 @@ export default {
       type: Number,
       default: 5
     }
+  },
+  methods: {
+    randomInteger: function (min, max) {
+      const rand = min + Math.random() * (max - min)
+      return Math.floor(rand)
+    },
+    squaresArray: function () {
+      const matrix = document.querySelector('.matrix')
+      const squares = [...matrix.querySelectorAll('.row')]
+      return squares
+    },
+    computerSelect: function () {
+      let randInteger = 0
+      setInterval(() => {
+        randInteger = this.randomInteger(0, this.lines * this.items)
+        this.squaresArray()[randInteger].classList.remove('white')
+        this.squaresArray()[randInteger].classList.add('blue')
+      }, 1000)
+      this.squaresArray()[randInteger].classList.remove('blue', 'white')
+      this.squaresArray()[randInteger].classList.add('red')
+    }
+  },
+  mounted () {
+    this.squaresArray()
+    this.computerSelect()
   }
+
 }
 </script>
 

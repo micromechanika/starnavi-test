@@ -1,7 +1,7 @@
 <template>
-  <div class="gamezone">
+  <div class="gameZone">
     <squares
-      :lines="5"
+      :lines="1"
       :items="5"
     />
   </div>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style lang="scss">
-.gamezone {
+.gameZone {
   display: flex;
   flex-direction: row;
   justify-content: center;
