@@ -1,27 +1,25 @@
 <template>
-<div class="gamezone">
-  <div class="play">
-    <h3>gamezone</h3>
+  <div class="gamezone">
+    <squares
+      :lines="5"
+      :items="5"
+    />
   </div>
-</div>
 </template>
 
 <script>
+import squares from './squares'
 export default {
-  name: 'game'
+  name: 'game',
+  components: { squares }
 }
 </script>
 
-<style lang="scss" >
-.gamezone{
+<style lang="scss">
+.gamezone {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
-  .play{
-    width: 100px;
-    height: 100px;
-    background-color: rebeccapurple;
-  }
 </style>

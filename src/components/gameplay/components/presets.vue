@@ -1,7 +1,9 @@
 <template>
   <div class="pressers">
     <select v-model="selected">
-      <option v-for="preset in Presets" :value="preset.name" :key="preset.name">
+      <option v-for="preset in Presets"
+              :value="preset.name"
+              :key="preset.name">
         {{ preset.name }}
       </option>
     </select>
@@ -47,7 +49,7 @@ export default {
   select{
     background-color: $selectColor;
   }
-input{
+  input{
   background-color: $inputColor;
 }
   button {
