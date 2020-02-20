@@ -16,7 +16,7 @@
     font-family: Segoe UI, Quicksand, Source Sans Pro, BlinkMacSystemFont, Roboto,
     Helvetica Neue, Arial, sans-serif;
     font-style: normal;
-    background: $white;
+    background: $baclkround;
     font-size: 16px;
   }
   .container {

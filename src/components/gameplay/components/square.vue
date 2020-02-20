@@ -4,40 +4,13 @@
 
 <script>
 
-import { mixins } from '../../../mixins/mixins'
-import { mapGetters } from 'vuex'
 export default {
   name: 'square',
-  mixins: [mixins],
-  data () {
-    return {
-      randomSquare: null
-    }
-  },
-  computed: {
-    ...mapGetters(['allSquares', 'squares'])
-  },
   methods: {
     userSelect: function (e) {
       e.target.classList.remove('blue', 'white')
       e.target.classList.add('green')
-      this.$store.commit('userSelect', 1)
-    },
-    randomSelect: function () {
-      this.randomSquare = this.randomInteger(0, this.squares)
-      this.allSquares[this.randomSquare].classList.remove('white')
-      this.allSquares[this.randomSquare].classList.add('blue')
-    },
-    computerSelect: function () {
-      this.allSquares[this.randomSquare].classList.remove('blue', 'white')
-      this.allSquares[this.randomSquare].classList.add('red')
-      this.$store.commit('computerSelect', 1)
     }
-  },
-  mounted () {
-    setInterval(() => {
-      this.randomSelect()
-    }, 5000)
   }
 }
 </script>
