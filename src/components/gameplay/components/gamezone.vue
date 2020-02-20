@@ -1,8 +1,8 @@
 <template>
   <div class="gameZone">
     <squares
-      :lines="1"
-      :items="5"
+      :lines="5"
+      :squares="5"
     />
   </div>
 </template>

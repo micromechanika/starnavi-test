@@ -1,5 +1,5 @@
 <template>
-    <div class="row white" @click.stop.once="selectSquare" ></div>
+    <div class="square white" @click.stop.once="selectSquare" ></div>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
-.row{
+.square{
   width: 3.3em;
   height: 3.3em;
   border: $borderColor solid .1em;

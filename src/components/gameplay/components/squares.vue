@@ -1,46 +1,49 @@
 <template>
   <div class="matrix">
-    <div class="line" v-for="line in lines" :key="line">
-      <square v-for="item in items"  :key="item"/>
-    </div>
+      <div class="line" v-for="line in lines" :key="line">
+        <square v-for="square in squares"  :key="square" />
+      </div>
   </div>
 </template>
 
 <script>
 import square from './square'
+import { mixins } from '../../../mixins/mixins'
 
 export default {
   name: 'squares',
+  mixins: [mixins],
   components: { square },
   props: {
     lines: {
       type: Number,
       default: 5
     },
-    items: {
+    squares: {
       type: Number,
       default: 5
     }
   },
+  data () {
+    return {
+      randInteger: null,
+      comp: false
+    }
+  },
   methods: {
-    randomInteger: function (min, max) {
-      const rand = min + Math.random() * (max - min)
-      return Math.floor(rand)
-    },
     squaresArray: function () {
       const matrix = document.querySelector('.matrix')
-      const squares = [...matrix.querySelectorAll('.row')]
-      return squares
+      return [...matrix.querySelectorAll('.square')]
     },
     computerSelect: function () {
-      let randInteger = 0
       setInterval(() => {
-        randInteger = this.randomInteger(0, this.lines * this.items)
-        this.squaresArray()[randInteger].classList.remove('white')
-        this.squaresArray()[randInteger].classList.add('blue')
+        this.randInteger = this.randomInteger(0, this.lines * this.squares)
+        this.squaresArray()[this.randInteger].classList.remove('white')
+        this.squaresArray()[this.randInteger].classList.add('blue')
       }, 1000)
-      this.squaresArray()[randInteger].classList.remove('blue', 'white')
-      this.squaresArray()[randInteger].classList.add('red')
+
+      this.squaresArray()[this.randInteger].classList.remove('blue', 'white')
+      this.squaresArray()[this.randInteger].classList.add('red')
     }
   },
   mounted () {
