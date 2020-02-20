@@ -1,21 +1,39 @@
 <template>
-    <div class="square white" @click.stop.once="selectSquare" ></div>
+    <div class="square white" @click.stop.once="userSelect" ></div>
 </template>
 
 <script>
+
+import { mixins } from '../../../mixins/mixins'
+import { mapGetters } from 'vuex'
 export default {
   name: 'square',
+  mixins: [mixins],
   data () {
     return {
-      user: null
+      randomSquare: null
     }
   },
+  computed: {
+    ...mapGetters(['squares'])
+  },
   methods: {
-    selectSquare: function (e) {
+    userSelect: function (e) {
       e.target.classList.remove('blue', 'white')
       e.target.classList.add('green')
-      this.user += 1
+      this.$store.commit('userSelect', 1)
+    },
+    randomSelect: function () {
+      setInterval(() => {
+        this.randomSquare = this.randomInteger(0, this.squares)
+      }, 5000)
+    },
+    computerSelect: function () {
+      this.$store.commit('computerSelect', 1)
     }
+  },
+  mounted () {
+    this.randomSelect()
   }
 }
 </script>

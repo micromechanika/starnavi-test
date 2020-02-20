@@ -11,7 +11,7 @@ import square from './square'
 import { mixins } from '../../../mixins/mixins'
 
 export default {
-  name: 'squares',
+  name: 'matrix',
   mixins: [mixins],
   components: { square },
   props: {
@@ -24,33 +24,16 @@ export default {
       default: 5
     }
   },
-  data () {
-    return {
-      randInteger: null,
-      comp: false
-    }
-  },
   methods: {
     squaresArray: function () {
       const matrix = document.querySelector('.matrix')
       return [...matrix.querySelectorAll('.square')]
-    },
-    computerSelect: function () {
-      setInterval(() => {
-        this.randInteger = this.randomInteger(0, this.lines * this.squares)
-        this.squaresArray()[this.randInteger].classList.remove('white')
-        this.squaresArray()[this.randInteger].classList.add('blue')
-      }, 1000)
-
-      this.squaresArray()[this.randInteger].classList.remove('blue', 'white')
-      this.squaresArray()[this.randInteger].classList.add('red')
     }
   },
   mounted () {
-    this.squaresArray()
-    this.computerSelect()
+    this.$store.commit('allSquares', this.squaresArray())
+    this.$store.commit('squares', this.squaresArray().length)
   }
-
 }
 </script>
 

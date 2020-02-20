@@ -1,17 +1,14 @@
 <template>
   <div class="gameZone">
-    <squares
-      :lines="5"
-      :squares="5"
-    />
+    <matrix :lines="5" :squares="5" />
   </div>
 </template>
 
 <script>
-import squares from './squares'
+import matrix from './matrix'
 export default {
   name: 'game',
-  components: { squares }
+  components: { matrix }
 }
 </script>
 
