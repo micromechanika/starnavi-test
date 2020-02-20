@@ -6,13 +6,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     presets: [],
-    userSelect: null,
-    computerSelect: null
+    userSelect: 0,
+    computerSelect: 0,
+    isUser: false
   },
   getters: {
     Presets: state => state.presets,
     userSelect: state => state.userSelect,
-    computerSelect: state => state.computerSelect
+    computerSelect: state => state.computerSelect,
+    isUser: state => state.isUser
   },
   mutations: {
     Presets: (state, payload) => {
@@ -23,6 +25,9 @@ export default new Vuex.Store({
     },
     computerSelect: (state, payload) => {
       state.computerSelect += payload
+    },
+    isUser: (state, payload) => {
+      state.isUser = payload
     }
 
   },

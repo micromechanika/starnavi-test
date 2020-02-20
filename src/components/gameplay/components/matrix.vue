@@ -1,8 +1,8 @@
 <template>
   <div class="matrix">
-      <div class="line" v-for="line in lines" :key="line">
-        <square v-for="square in squares"  :key="square" />
-      </div>
+    <div class="line" v-for="line in lines" :key="line">
+      <square v-for="square in squares" :key="square" />
+    </div>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      isUser: 'isUser',
       user: 'userSelect',
       computer: 'computerSelect'
     })
@@ -46,56 +47,62 @@ export default {
       this.max = this.allSquares.length
     },
     randomSelect: function () {
-      console.log(this.randomSquare)
+      console.log(this.randomSquare, 'random')
       this.allSquares[this.randomSquare].classList.remove('white')
       this.allSquares[this.randomSquare].classList.add('blue')
     },
     computerSelect: function () {
-      console.log(this.randomSquare)
-      this.allSquares[this.randomSquare].classList.remove('blue')
+      console.log(this.randomSquare, 'comp')
+      this.allSquares[this.randomSquare].classList.remove('blue', 'white')
       this.allSquares[this.randomSquare].classList.add('red')
       this.$store.commit('computerSelect', 1)
     },
+    userSelect: function (e) {
+      console.log(this.randomSquare, 'user')
+      e.target.classList.remove('blue', 'white')
+      e.target.classList.add('green')
+      this.$store.commit('userSelect', 1)
+      this.$store.commit('isUser', true)
+    },
     winner: function () {
-      (this.computer > (this.max / 2)) ? console.log('computer') : console.log('user')
+      this.computer <= Math.round(this.max / 2) ? console.log('computer WINN') : console.log('user WINN')
     },
     playGame: function () {
-      this.gameTime = setInterval(() => {
+      console.log(this.max, this.user, this.computer, 'condition =>', this.max - (this.user + this.computer) <= Math.round(this.max / 2))
+      if (this.max - (this.user + this.computer) <= Math.round(this.max / 2)) {
+        clearInterval(this.gameTime)
+        console.log('stop')
+        this.winner()
+      } else {
+        console.log('play')
         this.randomSquare = this.randomInteger(0, this.max)
         this.randomSelect()
-        setTimeout(() => {
-          this.computerSelect()
-        }, 1000)
-      }, 1000)
+        this.isUser ? this.userSelect() : this.computerSelect()
+        this.$store.commit('isUser', false)
+      }
     },
     init: function () {
       this.squaresArray()
-      if ((this.max - (this.user + this.computer)) <= (Math.round(this.max / 2))) {
-        clearInterval(this.gameTime)
-        this.winner()
-        console.log('stop')
-      } else {
+      this.gameTime = setInterval(() => {
         this.playGame()
-        console.log('play')
-      }
+      }, 3000)
     }
   },
   mounted () {
     this.init()
   }
 }
-
 </script>
 
 <style lang="scss">
-  .line{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .matrix{
-    border: $borderColor solid .1em;
-  }
+.line {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.matrix {
+  border: $borderColor solid 0.1em;
+}
 </style>
