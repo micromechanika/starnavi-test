@@ -15,7 +15,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['squares'])
+    ...mapGetters(['allSquares', 'squares'])
   },
   methods: {
     userSelect: function (e) {
@@ -24,16 +24,20 @@ export default {
       this.$store.commit('userSelect', 1)
     },
     randomSelect: function () {
-      setInterval(() => {
-        this.randomSquare = this.randomInteger(0, this.squares)
-      }, 5000)
+      this.randomSquare = this.randomInteger(0, this.squares)
+      this.allSquares[this.randomSquare].classList.remove('white')
+      this.allSquares[this.randomSquare].classList.add('blue')
     },
     computerSelect: function () {
+      this.allSquares[this.randomSquare].classList.remove('blue', 'white')
+      this.allSquares[this.randomSquare].classList.add('red')
       this.$store.commit('computerSelect', 1)
     }
   },
   mounted () {
-    this.randomSelect()
+    setInterval(() => {
+      this.randomSelect()
+    }, 5000)
   }
 }
 </script>
@@ -51,12 +55,12 @@ export default {
   background-color: $redSquare;
   border: $redSquare solid .1em;
 }
-.blue{
-  background-color: $blueSquare;
-  border: $blueSquare solid .1em;
-}
 .green{
   background-color: $greenSquare;
   border: $greenSquare solid .1em;
+}
+.blue{
+  background-color: $blueSquare;
+  border: $blueSquare solid .1em;
 }
 </style>
