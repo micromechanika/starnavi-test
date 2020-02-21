@@ -57,30 +57,28 @@ export default {
       this.allSquares[this.randomSquare].classList.add('red')
       this.$store.commit('computerSelect', 1)
     },
-    userSelect: function (e) {
-      console.log(this.randomSquare, 'user')
-      e.target.classList.remove('blue', 'white')
-      e.target.classList.add('green')
-      this.$store.commit('userSelect', 1)
-      this.$store.commit('isUser', true)
-    },
     winner: function () {
-      console.log(this.max, this.user, this.computer, Math.round(this.max / 2), 'condition =>', this.max - (this.user + this.computer) <= Math.round(this.max / 2))
       this.computer > this.user ? console.log('computer WINN') : console.log('user WINN')
     },
     playGame: function () {
-      if (this.user + this.computer >= Math.round(this.max / 2)) {
+      console.log(
+        this.max,
+        this.user,
+        this.computer,
+        Math.ceil(this.max / 2),
+        'condition =>', this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)
+      )
+      if (this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)) {
         clearInterval(this.gameTime)
         console.log('stop')
         this.winner()
       } else {
         console.log('play')
-
         this.promise()
           .then(this.randomSquare = this.randomInteger(0, this.max))
           .then(this.randomSelect())
           .then(setTimeout(() => {
-            this.isUser ? this.userSelect() : this.computerSelect()
+            if (!this.isUser) this.computerSelect()
             this.$store.commit('isUser', false)
           }, 3000))
           .catch(err => console.log(err))

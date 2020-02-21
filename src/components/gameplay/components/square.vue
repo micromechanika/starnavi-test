@@ -7,7 +7,13 @@
 export default {
   name: 'square',
   methods: {
-
+    userSelect: function (e) {
+      console.log(this.randomSquare, 'user')
+      e.target.classList.remove('blue', 'white')
+      e.target.classList.add('green')
+      this.$store.commit('userSelect', 1)
+      this.$store.commit('isUser', true)
+    }
   }
 }
 </script>
