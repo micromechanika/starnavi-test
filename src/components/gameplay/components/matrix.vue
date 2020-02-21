@@ -91,13 +91,14 @@ export default {
     },
     init: function () {
       this.squaresArray()
+      this.playGame()
       this.gameTime = setInterval(() => {
         this.playGame()
       }, this.delay + 1000)
     }
   },
   mounted () {
-    document.getElementById('play').addEventListener('click', this.init())
+    document.getElementById('play').addEventListener('click', this.init)
   }
 }
 </script>
