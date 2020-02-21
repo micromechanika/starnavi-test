@@ -1,6 +1,6 @@
 <template>
   <div class="gameZone">
-    <matrix :lines="5" :squares="5" />
+    <matrix :lines="1" :squares="5" />
   </div>
 </template>
 

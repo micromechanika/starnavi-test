@@ -65,27 +65,32 @@ export default {
       this.$store.commit('isUser', true)
     },
     winner: function () {
-      this.computer <= Math.round(this.max / 2) ? console.log('computer WINN') : console.log('user WINN')
+      console.log(this.max, this.user, this.computer, Math.round(this.max / 2), 'condition =>', this.max - (this.user + this.computer) <= Math.round(this.max / 2))
+      this.computer > this.user ? console.log('computer WINN') : console.log('user WINN')
     },
     playGame: function () {
-      console.log(this.max, this.user, this.computer, 'condition =>', this.max - (this.user + this.computer) <= Math.round(this.max / 2))
-      if (this.max - (this.user + this.computer) <= Math.round(this.max / 2)) {
+      if (this.user + this.computer >= Math.round(this.max / 2)) {
         clearInterval(this.gameTime)
         console.log('stop')
         this.winner()
       } else {
         console.log('play')
-        this.randomSquare = this.randomInteger(0, this.max)
-        this.randomSelect()
-        this.isUser ? this.userSelect() : this.computerSelect()
-        this.$store.commit('isUser', false)
+
+        this.promise()
+          .then(this.randomSquare = this.randomInteger(0, this.max))
+          .then(this.randomSelect())
+          .then(setTimeout(() => {
+            this.isUser ? this.userSelect() : this.computerSelect()
+            this.$store.commit('isUser', false)
+          }, 3000))
+          .catch(err => console.log(err))
       }
     },
     init: function () {
       this.squaresArray()
       this.gameTime = setInterval(() => {
         this.playGame()
-      }, 3000)
+      }, 5000)
     }
   },
   mounted () {
