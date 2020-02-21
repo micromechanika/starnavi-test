@@ -97,7 +97,7 @@ export default {
     }
   },
   mounted () {
-    this.init()
+    document.getElementById('play').addEventListener('click', this.init())
   }
 }
 </script>

@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button  @click="showselected">play</button>
+    <button id="play" @click="showselected()">play</button>
   </div>
 </template>
 
