@@ -6,8 +6,8 @@ export const mixins = {
     },
     promise: function () {
       const promise = new Promise((resolve, reject) => {
-        resolve('selected')
-        reject(new Error('o_O'))
+        resolve()
+        reject(new Error('in selected something broke'))
       })
       return promise
     }

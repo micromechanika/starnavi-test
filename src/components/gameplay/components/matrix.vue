@@ -28,9 +28,11 @@ export default {
   data () {
     return {
       allSquares: [],
-      max: '',
-      randomSquare: '',
-      gameTime: ''
+      max: null,
+      randomValues: [],
+      randomSquare: null,
+      gameTime: null,
+      delay: 3000
     }
   },
   computed: {
@@ -60,14 +62,17 @@ export default {
     winner: function () {
       this.computer > this.user ? console.log('computer WINN') : console.log('user WINN')
     },
+    getUnique: function () {
+      const unique = this.randomInteger(0, this.max)
+      const isUnique = this.randomValues.every(i => i !== unique)
+      if (isUnique) {
+        this.randomSquare = unique
+        this.randomValues.push(unique)
+      } else {
+        this.getUnique()
+      }
+    },
     playGame: function () {
-      console.log(
-        this.max,
-        this.user,
-        this.computer,
-        Math.ceil(this.max / 2),
-        'condition =>', this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)
-      )
       if (this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)) {
         clearInterval(this.gameTime)
         console.log('stop')
@@ -75,12 +80,12 @@ export default {
       } else {
         console.log('play')
         this.promise()
-          .then(this.randomSquare = this.randomInteger(0, this.max))
+          .then(this.getUnique())
           .then(this.randomSelect())
           .then(setTimeout(() => {
             if (!this.isUser) this.computerSelect()
             this.$store.commit('isUser', false)
-          }, 3000))
+          }, this.delay))
           .catch(err => console.log(err))
       }
     },
@@ -88,7 +93,7 @@ export default {
       this.squaresArray()
       this.gameTime = setInterval(() => {
         this.playGame()
-      }, 5000)
+      }, this.delay + 1000)
     }
   },
   mounted () {
