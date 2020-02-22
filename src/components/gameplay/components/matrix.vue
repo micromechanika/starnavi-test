@@ -50,22 +50,20 @@ export default {
       this.max = this.allSquares.length
     },
     randomSelect: function () {
-      console.log(this.randomSquare, 'random')
       this.allSquares[this.randomSquare].classList.remove('white')
       this.allSquares[this.randomSquare].classList.add('blue')
     },
     computerSelect: function () {
-      console.log(this.randomSquare, 'comp')
       this.allSquares[this.randomSquare].classList.remove('blue', 'white')
       this.allSquares[this.randomSquare].classList.add('red')
-      this.$store.commit('computerSelect', 1)
+      this.$store.commit('computerSelect')
+      this.$store.commit('isUser', false)
     },
     userSelect: function (e) {
       if (e.target === this.allSquares[this.randomSquare]) {
-        console.log(this.randomSquare, 'user')
         e.target.classList.remove('blue', 'white')
         e.target.classList.add('green')
-        this.$store.commit('userSelect', 1)
+        this.$store.commit('userSelect')
         this.$store.commit('isUser', true)
       }
     },
@@ -85,10 +83,8 @@ export default {
     playGame: function () {
       if (this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)) {
         clearInterval(this.gameTime)
-        console.log('stop')
         this.winner()
       } else {
-        console.log('play')
         this.promise()
           .then(this.getUnique())
           .then(this.randomSelect())
@@ -99,7 +95,17 @@ export default {
           .catch(err => console.log(err))
       }
     },
+    reset: function () {
+      this.randomValues = []
+      this.randomSquare = null
+      this.gameTime = null
+      this.allSquares.forEach(i => {
+        i.classList.remove('blue', 'green', 'red')
+        i.classList.add('white')
+      })
+    },
     init: function () {
+      this.reset()
       this.squaresArray()
       this.playGame()
       this.gameTime = setInterval(() => {

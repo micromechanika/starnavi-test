@@ -3,41 +3,26 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-    presets: [],
+const defaultState = () => {
+  return {
     userSelect: 0,
     computerSelect: 0,
     isUser: false,
     winner: '',
     name: ''
+  }
+}
+
+const server = {
+  state: {
+    presets: []
   },
   getters: {
-    Presets: state => state.presets,
-    userSelect: state => state.userSelect,
-    computerSelect: state => state.computerSelect,
-    isUser: state => state.isUser,
-    winner: state => state.winner,
-    name: state => state.name
+    Presets: state => state.presets
   },
   mutations: {
     Presets: (state, payload) => {
       state.presets = payload
-    },
-    userSelect: (state, payload) => {
-      state.userSelect += payload
-    },
-    computerSelect: (state, payload) => {
-      state.computerSelect += payload
-    },
-    isUser: (state, payload) => {
-      state.isUser = payload
-    },
-    winner: (state, payload) => {
-      state.winner = payload
-    },
-    name: (state, payload) => {
-      state.name = payload
     }
   },
   actions: {
@@ -50,6 +35,40 @@ export default new Vuex.Store({
       ]
       context.commit('Presets', presets)
     }
+  }
+}
+
+const local = {
+  state: defaultState(),
+  getters: {
+    userSelect: state => state.userSelect,
+    computerSelect: state => state.computerSelect,
+    isUser: state => state.isUser,
+    winner: state => state.winner,
+    name: state => state.name
   },
-  modules: {}
+  mutations: {
+    userSelect: (state) => {
+      state.userSelect += 1
+    },
+    computerSelect: (state) => {
+      state.computerSelect += 1
+    },
+    isUser: (state, payload) => {
+      state.isUser = payload
+    },
+    winner: (state, payload) => {
+      state.winner = payload
+    },
+    name: (state, payload) => {
+      state.name = payload
+    },
+    resetState: (state) => {
+      Object.assign(state, defaultState())
+    }
+  }
+}
+
+export default new Vuex.Store({
+  modules: { server, local }
 })

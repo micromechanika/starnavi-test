@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button id="play" @click="showselected()">play</button>
+    <button id="play" @click="showselected">play</button>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
       const show = this.Presets.filter(i => {
         return i.name === this.selected ? i : ''
       })
+      this.$store.commit('resetState')
       this.$store.commit('name', this.playerName !== '' ? this.playerName : 'no name user')
       console.log(show[0].name)
       console.log(show[0].field)
