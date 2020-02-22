@@ -23,6 +23,10 @@ export default {
   margin: 1em;
   width: auto;
   height: 3em;
+  h3{
+    font-size: 1em;
+    color: $messageColor;
+  }
 }
 
 </style>

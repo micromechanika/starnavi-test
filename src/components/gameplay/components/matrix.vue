@@ -60,6 +60,15 @@ export default {
       this.allSquares[this.randomSquare].classList.add('red')
       this.$store.commit('computerSelect', 1)
     },
+    userSelect: function (e) {
+      if (e.target === this.allSquares[this.randomSquare]) {
+        console.log(this.randomSquare, 'user')
+        e.target.classList.remove('blue', 'white')
+        e.target.classList.add('green')
+        this.$store.commit('userSelect', 1)
+        this.$store.commit('isUser', true)
+      }
+    },
     winner: function () {
       this.computer > this.user ? this.$store.commit('winner', 'Computer Win') : this.$store.commit('winner', `User: ${this.userName} Win`)
     },
@@ -100,6 +109,7 @@ export default {
   },
   mounted () {
     document.getElementById('play').addEventListener('click', this.init)
+    document.querySelector('.matrix').addEventListener('click', this.userSelect)
   }
 }
 </script>

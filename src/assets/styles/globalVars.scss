@@ -17,7 +17,7 @@ $greenSquare: #00e871;
 $redSquare: #e85a5f;
 $blueSquare: #42d8e8;
 
-
+$messageColor:#898989;
 
 @mixin mQ($arg) {
   @media screen and (min-width: $arg) {

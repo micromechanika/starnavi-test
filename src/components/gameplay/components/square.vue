@@ -1,5 +1,5 @@
 <template>
-    <div class="square white" @click.stop.once="userSelect"></div>
+    <div class="square white" ></div>
 </template>
 
 <script>
@@ -7,13 +7,6 @@
 export default {
   name: 'square',
   methods: {
-    userSelect: function (e) {
-      console.log(this.randomSquare, 'user')
-      e.target.classList.remove('blue', 'white')
-      e.target.classList.add('green')
-      this.$store.commit('userSelect', 1)
-      this.$store.commit('isUser', true)
-    }
   }
 }
 </script>
