@@ -60,7 +60,8 @@ export default {
       this.$store.commit('computerSelect', 1)
     },
     winner: function () {
-      this.computer > this.user ? console.log('computer WINN') : console.log('user WINN')
+      const userName = 'Dima'
+      this.computer > this.user ? this.$store.commit('winner', 'Computer Win') : this.$store.commit('winner', `User: ${userName} Win`)
     },
     getUnique: function () {
       const unique = this.randomInteger(0, this.max)

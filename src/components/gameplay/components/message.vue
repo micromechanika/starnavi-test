@@ -1,12 +1,16 @@
 <template>
-<div class="message">
-  <h3>this is message</h3>
+<div class="message" >
+    <h3 v-show="winner" >{{winner}}</h3>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'message'
+  name: 'message',
+  computed: {
+    ...mapGetters(['winner'])
+  }
 }
 </script>
 
@@ -16,5 +20,9 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin: 1em;
+  width: auto;
+  height: 3em;
 }
+
 </style>

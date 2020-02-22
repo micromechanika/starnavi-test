@@ -8,13 +8,15 @@ export default new Vuex.Store({
     presets: [],
     userSelect: 0,
     computerSelect: 0,
-    isUser: false
+    isUser: false,
+    winner: ''
   },
   getters: {
     Presets: state => state.presets,
     userSelect: state => state.userSelect,
     computerSelect: state => state.computerSelect,
-    isUser: state => state.isUser
+    isUser: state => state.isUser,
+    winner: state => state.winner
   },
   mutations: {
     Presets: (state, payload) => {
@@ -28,8 +30,10 @@ export default new Vuex.Store({
     },
     isUser: (state, payload) => {
       state.isUser = payload
+    },
+    winner: (state, payload) => {
+      state.winner = payload
     }
-
   },
   actions: {
     Presets: (context, payload) => {
