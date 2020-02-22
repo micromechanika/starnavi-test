@@ -9,14 +9,16 @@ export default new Vuex.Store({
     userSelect: 0,
     computerSelect: 0,
     isUser: false,
-    winner: ''
+    winner: '',
+    name: ''
   },
   getters: {
     Presets: state => state.presets,
     userSelect: state => state.userSelect,
     computerSelect: state => state.computerSelect,
     isUser: state => state.isUser,
-    winner: state => state.winner
+    winner: state => state.winner,
+    name: state => state.name
   },
   mutations: {
     Presets: (state, payload) => {
@@ -33,6 +35,9 @@ export default new Vuex.Store({
     },
     winner: (state, payload) => {
       state.winner = payload
+    },
+    name: (state, payload) => {
+      state.name = payload
     }
   },
   actions: {

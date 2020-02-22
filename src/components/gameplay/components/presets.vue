@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       selected: 'Pick game mode',
-      playerName: 'no name user'
+      playerName: ''
     }
   },
   computed: {
@@ -30,6 +30,7 @@ export default {
       const show = this.Presets.filter(i => {
         return i.name === this.selected ? i : ''
       })
+      this.$store.commit('name', this.playerName !== '' ? this.playerName : 'no name user')
       console.log(show[0].name)
       console.log(show[0].field)
       console.log(show[0].delay)

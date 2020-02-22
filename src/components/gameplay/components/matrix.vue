@@ -39,7 +39,8 @@ export default {
     ...mapGetters({
       isUser: 'isUser',
       user: 'userSelect',
-      computer: 'computerSelect'
+      computer: 'computerSelect',
+      userName: 'name'
     })
   },
   methods: {
@@ -60,8 +61,7 @@ export default {
       this.$store.commit('computerSelect', 1)
     },
     winner: function () {
-      const userName = 'Dima'
-      this.computer > this.user ? this.$store.commit('winner', 'Computer Win') : this.$store.commit('winner', `User: ${userName} Win`)
+      this.computer > this.user ? this.$store.commit('winner', 'Computer Win') : this.$store.commit('winner', `User: ${this.userName} Win`)
     },
     getUnique: function () {
       const unique = this.randomInteger(0, this.max)
