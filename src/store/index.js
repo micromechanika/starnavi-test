@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const defaultState = () => {
+const localState = () => {
   return {
     userSelect: 0,
     computerSelect: 0,
@@ -15,18 +15,23 @@ const defaultState = () => {
 
 const server = {
   state: {
-    presets: []
+    presets: [],
+    winners: []
   },
   getters: {
-    Presets: state => state.presets
+    Presets: state => state.presets,
+    winners: state => state.winners
   },
   mutations: {
     Presets: (state, payload) => {
       state.presets = payload
+    },
+    winners: (state, payload) => {
+      state.winners.push(payload)
     }
   },
   actions: {
-    Presets: (context, payload) => {
+    Presets: (context) => {
       const presets = [
         { name: 'Pick game mode', field: null, delay: null },
         { name: 'easyMode', field: 5, delay: 2000 },
@@ -34,12 +39,45 @@ const server = {
         { name: 'hardMode', field: 15, delay: 900 }
       ]
       context.commit('Presets', presets)
+    },
+    pushWinner: (context, payload) => {
+      const date = new Date()
+      const options = {
+        month: 'long',
+        day: 'numeric'
+      }
+      const H = date.getHours()
+      const M = date.getMinutes()
+      const dayMonth = date.toLocaleString('en-US', options)
+      const Y = date.getFullYear()
+
+      const winner = {
+        id: date,
+        winner: payload,
+        date: `${H}:${M}; ${dayMonth} ${Y}`
+      }
+      context.commit('winners', winner)
+    },
+    winners: (context) => {
+      const winners = [
+        {
+          id: 1,
+          winner: 'Computer',
+          date: '07:02; 19 February 2020'
+        },
+        {
+          id: 2,
+          winner: 'John',
+          date: '07:02; 20 February 2020'
+        }
+      ]
+      context.commit('winners', winners)
     }
   }
 }
 
 const local = {
-  state: defaultState(),
+  state: localState(),
   getters: {
     userSelect: state => state.userSelect,
     computerSelect: state => state.computerSelect,
@@ -64,7 +102,7 @@ const local = {
       state.name = payload
     },
     resetState: (state) => {
-      Object.assign(state, defaultState())
+      Object.assign(state, localState())
     }
   }
 }

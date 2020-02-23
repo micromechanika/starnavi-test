@@ -3,7 +3,7 @@
     <div class="content">
       <h2>Leader Board</h2>
       <ul>
-        <li v-for="item in winners" :key="item.id">
+        <li v-for="item in winners" :key="item.winner">
           <div class="info">
             <p class="name">{{ item.winner }}</p>
             <p class="date">{{ item.date }}</p>
@@ -15,23 +15,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'leaders',
-  data () {
-    return {
-      winners: [
-        {
-          id: 1,
-          winner: 'Computer',
-          date: '07:02; 19 February 2020'
-        },
-        {
-          id: 2,
-          winner: 'John',
-          date: '07:02; 20 February 2020'
-        }
-      ]
-    }
+  computed: {
+    ...mapGetters(['winners'])
+  },
+  beforeMount () {
+    this.$store.dispatch('winners')
   }
 }
 </script>
