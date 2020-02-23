@@ -28,6 +28,9 @@ const server = {
       state.presets = payload
     },
     winners: (state, payload) => {
+      state.winners = payload
+    },
+    pushWinner: (state, payload) => {
       state.winners.push(payload)
     }
   },
@@ -57,7 +60,9 @@ const server = {
         winner: payload,
         date: `${H}:${M}; ${dayMonth} ${Y}`
       }
-      context.commit('winners', winner)
+      context.commit('play')
+      context.commit('pushWinner', winner)
+      // context.commit('winners', winner)
     },
     winners: (context) => {
       const winners = [

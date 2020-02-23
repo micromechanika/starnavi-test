@@ -32,7 +32,7 @@ export default {
       randomValues: [],
       randomSquare: null,
       gameTime: null,
-      delay: 3000
+      delay: 1000
     }
   },
   computed: {
@@ -111,7 +111,6 @@ export default {
       })
     },
     init: function () {
-      this.$store.commit('play')
       this.reset()
       this.squaresArray()
       this.playGame()
