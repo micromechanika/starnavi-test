@@ -9,7 +9,8 @@ const localState = () => {
     computerSelect: 0,
     isUser: false,
     winner: '',
-    name: ''
+    name: '',
+    play: 0
   }
 }
 
@@ -52,7 +53,7 @@ const server = {
       const Y = date.getFullYear()
 
       const winner = {
-        id: date,
+        id: Date.now(),
         winner: payload,
         date: `${H}:${M}; ${dayMonth} ${Y}`
       }
@@ -83,7 +84,8 @@ const local = {
     computerSelect: state => state.computerSelect,
     isUser: state => state.isUser,
     winner: state => state.winner,
-    name: state => state.name
+    name: state => state.name,
+    play: state => state.play
   },
   mutations: {
     userSelect: (state) => {
@@ -100,6 +102,9 @@ const local = {
     },
     name: (state, payload) => {
       state.name = payload
+    },
+    play: (state) => {
+      state.play += 1
     },
     resetState: (state) => {
       Object.assign(state, localState())

@@ -3,7 +3,7 @@
     <div class="content">
       <h2>Leader Board</h2>
       <ul>
-        <li v-for="item in winners" :key="item.winner">
+        <li v-for="item in winners" :key="item.id">
           <div class="info">
             <p class="name">{{ item.winner }}</p>
             <p class="date">{{ item.date }}</p>
@@ -21,7 +21,7 @@ export default {
   computed: {
     ...mapGetters(['winners'])
   },
-  beforeMount () {
+  beforeCreate () {
     this.$store.dispatch('winners')
   }
 }

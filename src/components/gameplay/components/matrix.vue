@@ -111,6 +111,7 @@ export default {
       })
     },
     init: function () {
+      this.$store.commit('play')
       this.reset()
       this.squaresArray()
       this.playGame()

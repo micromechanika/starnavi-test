@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button id="play" @click="showselected">play</button>
+    <button id="play" @click="showselected">{{this.play>=1?'play again':'play'}}</button>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['Presets'])
+    ...mapGetters(['Presets', 'play'])
   },
   methods: {
     showselected: function () {
@@ -32,6 +32,7 @@ export default {
       })
       this.$store.commit('resetState')
       this.$store.commit('name', this.playerName !== '' ? this.playerName : 'no name user')
+
       console.log(show[0].name)
       console.log(show[0].field)
       console.log(show[0].delay)
