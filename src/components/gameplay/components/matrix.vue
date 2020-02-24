@@ -72,10 +72,9 @@ export default {
     winner: function () {
       if (this.computer > this.user) {
         this.$store.commit('name', 'Computer')
-      } else {
-        this.$store.commit('winner', `${this.userName} Win`)
-        this.$store.dispatch('pushWinner', this.userName)
       }
+      this.$store.commit('winner', `${this.userName} Win`)
+      this.$store.dispatch('pushWinner', this.userName)
     },
     getUnique: function () {
       const unique = this.randomInteger(0, this.max)

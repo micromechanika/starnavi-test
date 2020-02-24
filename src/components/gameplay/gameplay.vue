@@ -19,7 +19,7 @@ export default {
 <style lang="scss">
 .gameplay{
   width: 50%;
-  height: 100%;
+  height: auto;
   padding-top: 5em;
   border-right: $borderColor solid .2em;
 }
