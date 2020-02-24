@@ -1,6 +1,6 @@
 <template>
   <div class="pressers">
-    <select v-model="selected">
+    <select v-model="selected" @click="pressetsSelect">
       <option v-for="preset in Presets"
               :value="preset.name"
               :key="preset.name">
@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button id="play" @click="showselected">{{this.play>=1?'play again':'play'}}</button>
+    <button id="play" @click="playGame">{{this.play>=1?'play again':'play'}}</button>
   </div>
 </template>
 
@@ -26,16 +26,24 @@ export default {
     ...mapGetters(['Presets', 'play'])
   },
   methods: {
-    showselected: function () {
-      const show = this.Presets.filter(i => {
-        return i.name === this.selected ? i : ''
-      })
+    playGame: function () {
       this.$store.commit('resetState')
       this.$store.commit('name', this.playerName !== '' ? this.playerName : 'no name user')
+    },
+    pressetsSelect: function () {
+      const selectPreset = this.Presets.filter(i => {
+        return i.name === this.selected ? i : ''
+      })
+      let lines = null
+      const squares = 5
 
-      console.log(show[0].name)
-      console.log(show[0].field)
-      console.log(show[0].delay)
+      for (let i = 0; i < selectPreset[0].field; i++) {
+        if (i % 5 === 0) lines += 1
+      }
+
+      this.$store.commit('lines', lines)
+      this.$store.commit('squares', squares)
+      this.$store.commit('delay', selectPreset[0].delay)
     }
   },
   beforeCreate () {

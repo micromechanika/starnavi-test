@@ -1,14 +1,20 @@
 <template>
   <div class="gameZone">
-    <matrix :lines="1" :squares="5" />
+    <matrix
+      :lines="this.lines"
+      :squares="this.squares" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import matrix from './matrix'
 export default {
   name: 'game',
-  components: { matrix }
+  components: { matrix },
+  computed: {
+    ...mapGetters(['lines', 'squares'])
+  }
 }
 </script>
 

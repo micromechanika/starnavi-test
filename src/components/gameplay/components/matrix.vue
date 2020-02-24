@@ -31,8 +31,7 @@ export default {
       max: null,
       randomValues: [],
       randomSquare: null,
-      gameTime: null,
-      delay: 1000
+      gameTime: null
     }
   },
   computed: {
@@ -40,7 +39,8 @@ export default {
       isUser: 'isUser',
       user: 'userSelect',
       computer: 'computerSelect',
-      userName: 'name'
+      userName: 'name',
+      delay: 'delay'
     })
   },
   methods: {
@@ -116,7 +116,7 @@ export default {
       this.playGame()
       this.gameTime = setInterval(() => {
         this.playGame()
-      }, this.delay + 1000)
+      }, this.delay + 10)
     }
   },
   mounted () {

@@ -17,11 +17,17 @@ const localState = () => {
 const server = {
   state: {
     presets: [],
-    winners: []
+    winners: [],
+    lines: null,
+    squares: null,
+    delay: null
   },
   getters: {
     Presets: state => state.presets,
-    winners: state => state.winners
+    winners: state => state.winners,
+    lines: state => state.lines,
+    squares: state => state.squares,
+    delay: state => state.delay
   },
   mutations: {
     Presets: (state, payload) => {
@@ -32,7 +38,10 @@ const server = {
     },
     pushWinner: (state, payload) => {
       state.winners.push(payload)
-    }
+    },
+    lines: (state, payload) => { state.lines = payload },
+    squares: (state, payload) => { state.squares = payload },
+    delay: (state, payload) => { state.delay = payload }
   },
   actions: {
     Presets: (context) => {
