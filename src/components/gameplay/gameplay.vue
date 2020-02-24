@@ -18,9 +18,14 @@ export default {
 
 <style lang="scss">
 .gameplay{
-  width: 50%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   padding-top: 5em;
-  border-right: $borderColor solid .2em;
+  padding-bottom: 5em;
+
+  @include mQ($tablet){
+    width: 50%;
+    height: 100%;
+  }
 }
 </style>

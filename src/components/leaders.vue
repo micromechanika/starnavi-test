@@ -30,12 +30,27 @@ export default {
 <style lang="scss">
 .leaders {
   color: $textColor;
-  width: 50%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   padding-top: 5em;
+  padding-bottom: 5em;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: $borderColor solid .2em;
+  border-left: none;
+
+  @include mQ($tablet){
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    border-left: $borderColor solid .2em;
+    border-top: none;
+  }
   .content{
     width: 80%;
     display: flex;

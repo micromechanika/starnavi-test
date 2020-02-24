@@ -18,9 +18,16 @@ export default {
   .game{
     width: 100vw;
     height: 100vh;
+    font-size: 1vmax;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     border: $borderColor solid .2em;
+
+    @include mQ($tablet){
+      display: flex;
+      flex-direction: row;
+      align-items: self-start;
+    }
   }
 </style>
