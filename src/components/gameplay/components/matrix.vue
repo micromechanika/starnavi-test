@@ -40,7 +40,9 @@ export default {
       user: 'userSelect',
       computer: 'computerSelect',
       userName: 'name',
-      delay: 'delay'
+      delay: 'delay',
+      Squares: 'squares',
+      Lines: 'lines'
     })
   },
   methods: {
@@ -70,9 +72,10 @@ export default {
     winner: function () {
       if (this.computer > this.user) {
         this.$store.commit('name', 'Computer')
+      } else {
+        this.$store.commit('winner', `${this.userName} Win`)
+        this.$store.dispatch('pushWinner', this.userName)
       }
-      this.$store.commit('winner', `${this.userName} Win`)
-      this.$store.dispatch('pushWinner', this.userName)
     },
     getUnique: function () {
       const unique = this.randomInteger(0, this.max)
@@ -85,7 +88,8 @@ export default {
       }
     },
     playGame: function () {
-      if (this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)) {
+      const posible = Math.ceil(this.max / 2)
+      if (this.computer >= posible || this.user >= posible) {
         clearInterval(this.gameTime)
         this.winner()
         this.$store.commit('play')
@@ -109,17 +113,20 @@ export default {
         i.classList.add('white')
       })
     },
-    init: function () {
-      this.reset()
-      this.squaresArray()
-      this.playGame()
-      this.gameTime = setInterval(() => {
-        this.playGame()
-      }, this.delay + 10)
+    init: function (e) {
+      if (this.delay === null && this.Lines === null && this.Squares === null) {
+        e.stopPropagation()
+      } else {
+        this.reset()
+        this.squaresArray()
+        this.gameTime = setInterval(() => {
+          this.playGame()
+        }, this.delay + 10)
+      }
     }
   },
   mounted () {
-    document.getElementById('play').addEventListener('click', this.init)
+    document.getElementById('play').addEventListener('click', this.init, false)
     document.querySelector('.matrix').addEventListener('click', this.userSelect)
   }
 }

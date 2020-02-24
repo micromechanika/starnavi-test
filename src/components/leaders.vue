@@ -5,7 +5,7 @@
       <ul>
         <li v-for="item in winners" :key="item.id">
           <div class="info">
-            <p class="name">{{ item.winner }}</p>
+            <p class="name">{{ item.winner.trim().slice(0, 15) }}</p>
             <p class="date">{{ item.date }}</p>
           </div>
         </li>

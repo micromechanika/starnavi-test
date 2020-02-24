@@ -28,7 +28,7 @@ export default {
   methods: {
     playGame: function () {
       this.$store.commit('resetState')
-      this.$store.commit('name', this.playerName !== '' ? this.playerName : 'no name user')
+      this.$store.commit('name', this.playerName !== '' ? this.playerName.trim().slice(0, 15) : 'no name user')
     },
     pressetsSelect: function () {
       const selectPreset = this.Presets.filter(i => {

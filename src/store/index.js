@@ -1,7 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+
+const instance = axios.create({
+  baseURL: 'https://starnavi-frontend-test-task.herokuapp.com/',
+  timeout: 1000,
+  headers: { 'content-type': 'application/json; charset=utf-8' }
+})
 
 const localState = () => {
   return {
@@ -45,13 +52,19 @@ const server = {
   },
   actions: {
     Presets: (context) => {
-      const presets = [
-        { name: 'Pick game mode', field: null, delay: null },
-        { name: 'easyMode', field: 5, delay: 2000 },
-        { name: 'normalMode', field: 10, delay: 1000 },
-        { name: 'hardMode', field: 15, delay: 900 }
-      ]
-      context.commit('Presets', presets)
+      instance.get('/game-settings')
+        .then(response => {
+          const presets = Object.keys(response.data).map(i => {
+            return {
+              name: i,
+              field: response.data[i].field,
+              delay: response.data[i].delay
+            }
+          })
+          presets.unshift({ name: 'Pick game mode', field: null, delay: null })
+          context.commit('Presets', presets)
+        })
+        .catch(err => console.error(err))
     },
     pushWinner: (context, payload) => {
       const date = new Date()
@@ -60,32 +73,29 @@ const server = {
         day: 'numeric'
       }
       const H = date.getHours()
-      const M = date.getMinutes()
+      const M = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
       const dayMonth = date.toLocaleString('en-US', options)
       const Y = date.getFullYear()
 
       const winner = {
-        id: Date.now(),
         winner: payload,
-        date: `${H}:${M}; ${dayMonth} ${Y}`
+        date: `${H}:${M}  ${dayMonth}  ${Y}`
       }
-      context.commit('pushWinner', winner)
-      // context.commit('winners', winner)
+
+      instance.post('/winners', winner)
+        .then(() => {
+          // context.commit('pushWinner', winner)
+          context.dispatch('winners')
+        })
+        .catch(err => console.error(err))
     },
     winners: (context) => {
-      const winners = [
-        {
-          id: 1,
-          winner: 'Computer',
-          date: '07:02; 19 February 2020'
-        },
-        {
-          id: 2,
-          winner: 'John',
-          date: '07:02; 20 February 2020'
-        }
-      ]
-      context.commit('winners', winners)
+      instance.get('/winners')
+        .then(response => {
+          const winners = response.data.splice(response.data.length - 4, 4)
+          context.commit('winners', winners)
+        })
+        .catch(err => console.error(err))
     }
   }
 }
