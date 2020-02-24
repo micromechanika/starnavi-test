@@ -1,6 +1,6 @@
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/starnavideploy/'
+    ? '/starnavi-test/'
     : '/',
   css: {
     loaderOptions: {
