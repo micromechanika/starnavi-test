@@ -57,15 +57,61 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 3em;
   select{
+    display: block;
+    height: 100%;
+    font-size: 1em;
+    padding: .6em 1.4em .5em .8em;
+    line-height: 1.3;
+    color: $selectTextColor;
     background-color: $selectColor;
+    border: 1px solid $selectColor;
+    border-radius: 7px;
+    appearance: none;
+
+    background-image: url('../../../../public/v.svg'),
+    linear-gradient(to bottom, $selectColor 0%, $selectColor 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+
+    option{
+      font-weight:normal;
+    }
+    :focus{
+      border-color: #aaa;
+      box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+      box-shadow: 0 0 0 3px -moz-mac-focusring;
+      color: #222;
+      outline: none;
+    }
+    :hover{
+      border-color: #888;
+    }
+    ::-ms-expand{
+      display: none;
+    }
   }
   input{
+  height: 100%;
+  font-size: 1em;
+  padding: .6em 1.4em .5em .8em;
+  color: $inputTextColor;
   background-color: $inputColor;
+  border: 1px solid $inputColor;
+  border-radius: 7px;
 }
   button {
+    width: 8em;
+    height: 100%;
+    font-size: 1em;
+    color: $buttonTextColor;
     text-transform: uppercase;
     background-color: $buttonColor;
+    border: 1px solid $buttonColor;
+    border-radius: 7px;
   }
+
 }
 </style>
