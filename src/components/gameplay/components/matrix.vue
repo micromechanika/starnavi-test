@@ -70,10 +70,8 @@ export default {
     winner: function () {
       if (this.computer > this.user) {
         this.$store.commit('name', 'Computer')
-        this.$store.commit('winner', `${this.userName} Win`)
-      } else {
-        this.$store.commit('winner', `User: ${this.userName} Win`)
       }
+      this.$store.commit('winner', `${this.userName} Win`)
       this.$store.dispatch('pushWinner', this.userName)
     },
     getUnique: function () {
@@ -90,6 +88,7 @@ export default {
       if (this.computer >= Math.ceil(this.max / 2) || this.user >= Math.ceil(this.max / 2)) {
         clearInterval(this.gameTime)
         this.winner()
+        this.$store.commit('play')
       } else {
         this.promise()
           .then(this.getUnique())

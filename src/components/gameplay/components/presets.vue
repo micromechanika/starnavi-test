@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button id="play" @click="playGame">{{this.play>=1?'play again':'play'}}</button>
+    <button id="play" @click="playGame">{{this.play?'play again':'play'}}</button>
   </div>
 </template>
 

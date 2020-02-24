@@ -10,7 +10,7 @@ const localState = () => {
     isUser: false,
     winner: '',
     name: '',
-    play: 0
+    play: false
   }
 }
 
@@ -69,7 +69,6 @@ const server = {
         winner: payload,
         date: `${H}:${M}; ${dayMonth} ${Y}`
       }
-      context.commit('play')
       context.commit('pushWinner', winner)
       // context.commit('winners', winner)
     },
@@ -118,7 +117,7 @@ const local = {
       state.name = payload
     },
     play: (state) => {
-      state.play += 1
+      state.play = true
     },
     resetState: (state) => {
       Object.assign(state, localState())
