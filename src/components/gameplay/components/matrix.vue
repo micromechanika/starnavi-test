@@ -42,7 +42,8 @@ export default {
       userName: 'name',
       delay: 'delay',
       Squares: 'squares',
-      Lines: 'lines'
+      Lines: 'lines',
+      selected: 'selected'
     })
   },
   methods: {
@@ -113,8 +114,8 @@ export default {
       })
     },
     init: function (e) {
-      if (this.delay === null && this.Lines === null && this.Squares === null) {
-        e.stopPropagation()
+      if (this.selected === 'Pick game mode' || this.selected === '') {
+        e.preventDefault()
       } else {
         this.reset()
         this.squaresArray()

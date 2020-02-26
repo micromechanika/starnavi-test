@@ -8,7 +8,7 @@
       </option>
     </select>
     <input v-model="playerName" placeholder="Enter your name" />
-    <button id="play" @click="playGame">{{this.play?'play again':'play'}}</button>
+    <button id="play">{{this.play?'play again':'play'}}</button>
   </div>
 </template>
 
@@ -26,9 +26,15 @@ export default {
     ...mapGetters(['Presets', 'play'])
   },
   methods: {
-    playGame: function () {
-      this.$store.commit('resetState')
-      this.$store.commit('name', this.playerName !== '' ? this.playerName.trim().slice(0, 15) : 'no name user')
+    playGame: function (e) {
+      if (this.selected === 'Pick game mode') {
+        e.preventDefault()
+        this.$store.commit('resetState')
+      } else {
+        this.$store.commit('resetState')
+        this.$store.commit('selected', this.selected)
+        this.$store.commit('name', this.playerName !== '' ? this.playerName.trim().slice(0, 15) : 'no name user')
+      }
     },
     pressetsSelect: function () {
       const selectPreset = this.Presets.filter(i => {
@@ -48,6 +54,9 @@ export default {
   },
   beforeCreate () {
     this.$store.dispatch('Presets')
+  },
+  mounted () {
+    document.getElementById('play').addEventListener('click', this.playGame, false)
   }
 }
 </script>

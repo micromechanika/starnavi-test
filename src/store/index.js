@@ -17,7 +17,8 @@ const localState = () => {
     isUser: false,
     winner: '',
     name: '',
-    play: false
+    play: false,
+    selected: ''
   }
 }
 
@@ -108,7 +109,8 @@ const local = {
     isUser: state => state.isUser,
     winner: state => state.winner,
     name: state => state.name,
-    play: state => state.play
+    play: state => state.play,
+    selected: state => state.selected
   },
   mutations: {
     userSelect: (state) => {
@@ -128,6 +130,9 @@ const local = {
     },
     play: (state) => {
       state.play = true
+    },
+    selected: (state, payload) => {
+      state.selected = payload
     },
     resetState: (state) => {
       Object.assign(state, localState())
