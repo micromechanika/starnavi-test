@@ -40,12 +40,8 @@ export default {
       const selectPreset = this.Presets.filter(i => {
         return i.name === this.selected ? i : ''
       })
-      let lines = null
-      const squares = 5
-
-      for (let i = 0; i < selectPreset[0].field; i++) {
-        if (i % 5 === 0) lines += 1
-      }
+      const lines = selectPreset[0].field
+      const squares = selectPreset[0].field
 
       this.$store.commit('lines', lines)
       this.$store.commit('squares', squares)
